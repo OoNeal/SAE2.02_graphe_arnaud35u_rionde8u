@@ -1,11 +1,9 @@
 package src;
 
-import java.io.IOException;
-
 public class Principale {
 
     public static void main(String[] args){
-        GrapheListe g = new GrapheListe("graphe.txt");
+        GrapheListe g = new GrapheListe("document/graphe.txt");
 
         /*g.ajouterNoeud("A");
         g.ajouterNoeud("B");
