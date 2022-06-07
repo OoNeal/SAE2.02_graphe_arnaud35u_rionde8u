@@ -53,6 +53,15 @@ public class GrapheListe implements Graphe {
 
     }
 
+    public void ajouterNoeud(Noeud n)
+    {
+        if (!ensNom.contains(n.getNom()))
+        {
+            ensNom.add(n.getNom());
+            ensNoeuds.add(n);
+        }
+    }
+
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
