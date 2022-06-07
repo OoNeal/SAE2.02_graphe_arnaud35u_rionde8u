@@ -22,5 +22,29 @@ public class Noeud {
         this.adj = new ArrayList<Arc>();
     }
 
+    /**
+     * Méthode permettant d’ajouter un arc dans la liste des arcs adjacents
+     * @param destination correspondant au nom du noeud adjacent
+     * @param cout correspondant au coût de l’arc reliant ce noeud à son noeud adjacent
+     */
+    public void ajouterArc(String destination, double cout){
+        this.adj.add(new Arc(destination,cout));
+    }
 
+    /**
+     * Methode permettant de comparer deux noeud
+     * @param n correspondant au noeud à comparer
+     * @return true s'ils ont le même nom
+     */
+    public boolean equals(Noeud n){
+        return this.nom.equals(n.getNom());
+    }
+
+    /**
+     * Permet de recuperer le nom du noeud
+     * @return le nom du noeud
+     */
+    public String getNom() {
+        return nom;
+    }
 }
