@@ -43,4 +43,13 @@ public class Arc {
     public String getDest() {
         return dest;
     }
+
+    /**
+     * Methode toString
+     * @return Le nom du noeud destination de l'arc et son cout
+     */
+    @Override
+    public String toString() {
+        return dest + "(" + (int)cout + ")";
+    }
 }
