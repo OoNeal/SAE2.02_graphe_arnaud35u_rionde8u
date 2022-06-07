@@ -47,4 +47,12 @@ public class Noeud {
     public String getNom() {
         return nom;
     }
+
+    /**
+     * Permet de recuperer la liste des arcs adjacents
+     * @return la liste des arcs adjacents
+     */
+    public ArrayList<Arc> getAdj() {
+        return adj;
+    }
 }
