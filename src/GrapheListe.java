@@ -43,19 +43,11 @@ public class GrapheListe implements Graphe {
                 }
             }
         }
-
     }
 
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-        for (Noeud noeud : this.ensNoeuds) {
-            s.append(noeud.getNom()).append(" -> ");
-            for (Arc arc : noeud.getAdj()) {
-                s.append(arc).append(" ");
-            }
-            s.append("\n");
-        }
-        return s.toString();
+    public GrapheListe(List<String> ensNom, List<Noeud> ensNoeuds) {
+        this.ensNom = ensNom;
+        this.ensNoeuds = ensNoeuds;
     }
 
     @Override
@@ -70,5 +62,16 @@ public class GrapheListe implements Graphe {
                 return noeud.getAdj();
         }
         return null;
+    }
+
+
+    public void toGraphviz() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("digraph G {\n");
+        for (Noeud noeud : ensNoeuds) {
+            sb.append(noeud.getNom()).append(" -> [label = ").append(noeud.getAdj()).append("]\n");
+        }
+        sb.append("}");
+        System.out.println(sb.toString());
     }
 }
