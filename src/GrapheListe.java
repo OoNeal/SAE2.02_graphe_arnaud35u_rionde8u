@@ -74,4 +74,17 @@ public class GrapheListe implements Graphe {
         sb.append("}");
         System.out.println(sb.toString());
     }
+
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (Noeud noeud : this.ensNoeuds) {
+            s.append(noeud.getNom()).append(" -> ");
+            for (Arc arc : noeud.getAdj()) {
+                s.append(arc).append(" ");
+            }
+            s.append("\n");
+        }
+        return s.toString();
+    }
+
 }
