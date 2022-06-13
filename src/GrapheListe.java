@@ -1,7 +1,5 @@
 package src;
 
-import javax.print.attribute.PrintRequestAttribute;
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,51 +7,10 @@ public class GrapheListe implements Graphe {
     private final List<String> ensNom;
     private final List<Noeud> ensNoeuds;
 
-    public GrapheListe() {
+    public GrapheListe(String n) {
         this.ensNom = new ArrayList<>();
         this.ensNoeuds = new ArrayList<>();
-    }
-
-    /**
-     * Constructeur qui prend un nom de fichier en parametre et construit le graphe
-     *
-     * @param nom nom du fichier a convertir
-     */
-    public GrapheListe(String nom) {
-        this.ensNom = new ArrayList<>();
-        this.ensNoeuds = new ArrayList<>();
-        this.construireGraphe(nom);
-    }
-
-    private void construireGraphe(String nom) {
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader(nom));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        String line;
-        while (true) {
-            try {
-                if ((line = reader.readLine()) == null) break;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            String[] split = line.split(" ");
-            this.ensNom.add(split[0]);
-            this.ensNom.add(split[1]);
-            this.ajouterArc(split[0], split[1], Double.parseDouble(split[2]));
-        }
-    }
-
-    /**
-     * Permet d'ajouter
-     * @param nom nom du noeud
-     */
-    public void ajouterNoeud(String nom) {
-        if (!this.ensNom.contains(nom)) {
-            this.ensNom.add(nom);
-        }
+        this.ensNom.add(n);
     }
 
     public void ajouterArc(String depart, String destination, double cout) {
@@ -108,18 +65,14 @@ public class GrapheListe implements Graphe {
     }
 
 
-    public String toGraphviz() {
+    public void toGraphviz() {
         StringBuilder sb = new StringBuilder();
-        sb.append("digraph {\n");
+        sb.append("digraph G {\n");
         for (Noeud noeud : ensNoeuds) {
-            for (Arc arc : noeud.getAdj()) {
-                sb.append(noeud.getNom()).append(" -> ")
-                        .append(arc.getDest()).append(" [label = ")
-                        .append((int) arc.getCout()).append("]\n");
-            }
+            sb.append(noeud.getNom()).append(" -> [label = ").append(noeud.getAdj()).append("]\n");
         }
         sb.append("}");
-        return sb.toString();
+        System.out.println(sb.toString());
     }
 
     public String toString() {
