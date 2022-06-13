@@ -12,8 +12,8 @@ public class GrapheListe implements Graphe {
     private final List<Noeud> ensNoeuds;
 
     public GrapheListe(){
-        this.ensNom = new ArrayList<String>();
-        this.ensNoeuds = new ArrayList<Noeud>();
+        this.ensNom = new ArrayList<>();
+        this.ensNoeuds = new ArrayList<>();
     }
     public GrapheListe(String n) {
         this.ensNom = new ArrayList<>();
@@ -105,11 +105,6 @@ public class GrapheListe implements Graphe {
                 }
             }
         }
-    }
-
-    public GrapheListe(List<String> ensNom, List<Noeud> ensNoeuds) {
-        this.ensNom = ensNom;
-        this.ensNoeuds = ensNoeuds;
     }
 
     @Override
