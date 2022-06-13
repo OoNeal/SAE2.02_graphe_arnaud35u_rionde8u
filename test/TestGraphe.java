@@ -119,6 +119,6 @@ public class TestGraphe {
         String graphe = g.toGraphviz();
 
         // Vérification
-        assertEquals("digraph {\nA -> B [label = 12]\nB -> E [label = 11]\nC -> A [label = 19]\nD -> B [label = 23]\nE -> D [label = 43]\n}", graphe);
+        assertEquals("digraph G {\nA -> B [label = 12]\nB -> E [label = 11]\nC -> A [label = 19]\nD -> B [label = 23]\nE -> D [label = 43]\n}", graphe);
     }
 }
