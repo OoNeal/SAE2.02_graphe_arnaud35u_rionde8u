@@ -1,3 +1,5 @@
+package src;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -86,6 +88,16 @@ public class Valeur {
         }
         return res;
 
+    }
+
+    public List<String> calculerChemin(String destination) {
+        List<String> chemin = new ArrayList<>();
+        String noeud = destination;
+        while (noeud != null) {
+            chemin.add(noeud);
+            noeud = parent.get(noeud);
+        }
+        return chemin;
     }
 
 }
