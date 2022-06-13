@@ -11,6 +11,10 @@ public class GrapheListe implements Graphe {
     private final List<String> ensNom;
     private final List<Noeud> ensNoeuds;
 
+    public GrapheListe(){
+        this.ensNom = new ArrayList<String>();
+        this.ensNoeuds = new ArrayList<Noeud>();
+    }
     public GrapheListe(String n) {
         this.ensNom = new ArrayList<>();
         this.ensNoeuds = new ArrayList<>();
