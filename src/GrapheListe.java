@@ -11,20 +11,11 @@ public class GrapheListe implements Graphe {
     private final List<String> ensNom;
     private final List<Noeud> ensNoeuds;
 
-    public GrapheListe() {
+    public GrapheListe(String n) {
         this.ensNom = new ArrayList<>();
         this.ensNoeuds = new ArrayList<>();
-    }
-
-    /**
-     * Constructeur qui prend un nom de fichier en parametre et construit le graphe
-     *
-     * @param nom nom du fichier a convertir
-     */
-    public GrapheListe(String nom) {
-        this.ensNom = new ArrayList<>();
-        this.ensNoeuds = new ArrayList<>();
-        this.construireGraphe(nom);
+        this.ensNom.add(n);
+        this.construireGraphe(n);
     }
 
     private void construireGraphe(String nom) {
@@ -108,7 +99,6 @@ public class GrapheListe implements Graphe {
                         noeudDepart.ajouterArc(destination, cout);
                     }
                 }
-
             }
         }
     }
@@ -135,7 +125,7 @@ public class GrapheListe implements Graphe {
 
     public String toGraphviz() {
         StringBuilder sb = new StringBuilder();
-        sb.append("digraph {\n");
+        sb.append("digraph G {\n");
         for (Noeud noeud : ensNoeuds) {
             for (Arc arc : noeud.getAdj()) {
                 sb.append(noeud.getNom()).append(" -> ")
