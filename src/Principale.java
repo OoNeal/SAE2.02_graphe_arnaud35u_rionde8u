@@ -3,13 +3,7 @@ package src;
 public class Principale {
 
     public static void main(String[] args){
-        GrapheListe g = new GrapheListe("document/graphe.txt");
-
-        /*g.ajouterNoeud("A");
-        g.ajouterNoeud("B");
-        g.ajouterNoeud("C");
-        g.ajouterNoeud("D");
-        g.ajouterNoeud("E");
+        GrapheListe g = new GrapheListe();
 
         g.ajouterArc("A","B", 12);
         g.ajouterArc("A","D",87);
@@ -17,8 +11,12 @@ public class Principale {
         g.ajouterArc("C","A",19);
         g.ajouterArc("D","B",23);
         g.ajouterArc("D","C",10);
-        g.ajouterArc("E","D",43);*/
+        g.ajouterArc("E","D",43);
 
-        System.out.println(g.toGraphviz());
+        BellmanFord b = new BellmanFord();
+        Valeur v = b.resoudre(g, "A");
+        System.out.println(v);
+
+        //System.out.println(g.toGraphviz());
     }
 }
