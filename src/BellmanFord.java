@@ -1,50 +1,56 @@
 package src;
 
+// Question 13 : Algorithme de Bellman-Ford
+/*
+ * Algorithme de Bellman-Ford
+ * PointFixe(Graphe g InOut, Noeud depart) {
+ *  debut
+ *      valeurNoeudDepart = 0
+ *      pour tout noeud n de g
+ *         si NomNoeudN != depart alors
+ *          valeurNoeudN = +infini
+ *         finsi
+ *      finpour
+ *      pour i de 0 à longueurListeNoeuds - 1 faire
+ *      pour tout noeud n de g faire
+ *          pour tout les arcs a de n faire
+ *              si valeurNoeudN + valeurArcA < valeurNoeudDestinationA alors
+ *              valeurNoeudDestinationA = valeurNoeudN + valeurArcA
+ *              noeudParentDestinationA = noeudN
+ *          finsi
+ *      finpour
+ *  finpour
+ * fin
+ *
+ * Lexique :
+ *  noeudN : Noeud<valeurNoeudN,nomNoeudN>, noeud de la liste des noeuds du graphe
+ *  valeurNoeudN : int, valeur du noeudN
+ *  nomNoeudN : chaine, nom du noeudN
+ *  longueurListeNoeuds : int , longueur de la liste des noeuds du graphe
+ *  arcA : Arc<valeurArcA,NoeudA>, arc de la liste des arcs du graphe
+ *  valeurArcA : int, cout de l'arcA
+ *  ValeurNoeudDestinationA : int, valeur du noeud a la destination de l'arc A de la liste des arcs du graphe
+ *  NoeudParentDestinationA : Noeud<valeurNoeudDestinationA,nomNoeudDestionationA>, noeud parent du noeud a la destination de l'arc A de la liste des arcs du graphe
+ */
 public class BellmanFord {
 
-    public Valeur resoudre(Graphe g, String s) {
-        // initialisation
-        /*Valeur v = new Valeur();
-        for (String n : g.listeNoeuds()) {
-            v.setValeur(n, Double.POSITIVE_INFINITY);
-            v.setParent(n, null);
-        }
-        v.setValeur(s, 0);
-        return  v; */
-
-        int V = g.listeNoeuds().size();
-
+    public Valeur resoudre(Graphe g, String depart) {
         Valeur v = new Valeur();
+        v.setValeur(depart, 0);
         for (String n : g.listeNoeuds()) {
-            v.setValeur(n, Double.POSITIVE_INFINITY);
-            v.setParent(n, null);
+            if (!n.equals(depart))
+                v.setValeur(n, Double.MAX_VALUE);
         }
-
-        v.setValeur(s, 0);
-        for (Arc a : g.suivants(s)) {
-            v.setValeur(a.getDest(), a.getCout());
-            v.setParent(a.getDest(), s);
-        }
-
-        // calcul
-        for (int i = 0; i < V - 1; i++) {
-            for (Arc a : g.suivants(s)) {
-                if (v.getValeur(a.getDest()) > v.getValeur(s) + a.getCout()) {
-                    v.setValeur(a.getDest(), v.getValeur(s) + a.getCout());
-                    v.setParent(a.getDest(), s);
+        for (int i = 0; i < g.listeNoeuds().size() - 1; i++) {
+            for (String n : g.listeNoeuds()) {
+                for (Arc a : g.suivants(n)) {
+                    if (v.getValeur(n) + a.getCout() < v.getValeur(a.getDest())) {
+                        v.setValeur(a.getDest(), v.getValeur(n) + a.getCout());
+                        v.setParent(a.getDest(), n);
+                    }
                 }
             }
         }
-
-        //checks if there exist negative cycles in graph G
-        for (Arc a : g.suivants(s)) {
-            if (v.getValeur(a.getDest()) > v.getValeur(s) + a.getCout()) {
-                return null;
-            }
-        }
         return v;
-
-
-
     }
 }
