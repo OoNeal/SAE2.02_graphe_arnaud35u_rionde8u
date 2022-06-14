@@ -19,7 +19,7 @@ public class Noeud {
      */
     public Noeud(String nom) {
         this.nom = nom;
-        this.adj = new ArrayList<Arc>();
+        this.adj = new ArrayList<>();
     }
 
     /**
@@ -28,7 +28,14 @@ public class Noeud {
      * @param cout correspondant au coût de l’arc reliant ce noeud à son noeud adjacent
      */
     public void ajouterArc(String destination, double cout){
-        this.adj.add(new Arc(destination,cout));
+        boolean existe = false;
+        for (Arc arc : this.adj)
+            if (arc.getDest().equals(destination)) {
+                existe = true;
+                break;
+            }
+        if (!existe)
+            this.adj.add(new Arc(destination, cout));
     }
 
     /**
