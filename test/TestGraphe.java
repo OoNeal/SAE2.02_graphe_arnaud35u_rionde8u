@@ -17,38 +17,11 @@ public class TestGraphe {
     }
 
     @Test
-    public void test_ajouterNoeud() {
-        // Préparation des données
-        GrapheListe g = new GrapheListe();
-
-        // Méthode testée
-        g.ajouterNoeud("A");
-
-        // Vérification
-        assertEquals("A", g.listeNoeuds().get(0));
-    }
-
-    @Test
-    public void test_ajouterNoeud_dejaExistant() {
-        // Préparation des données
-        GrapheListe g = new GrapheListe();
-
-        // Méthode testée
-        g.ajouterNoeud("A");
-        g.ajouterNoeud("A");
-
-        // Vérification
-        assertEquals(1, g.listeNoeuds().size());
-    }
-
-    @Test
     public void test_ajouterArc() {
         // Préparation des données
         GrapheListe g = new GrapheListe();
 
-        // Méthode testée
-        g.ajouterNoeud("A");
-        g.ajouterNoeud("B");
+        // Méthode testées
         g.ajouterArc("A", "B", 12);
 
         // Vérification
@@ -62,51 +35,18 @@ public class TestGraphe {
         GrapheListe g = new GrapheListe();
 
         // Méthode testée
-        g.ajouterNoeud("A");
-        g.ajouterNoeud("B");
         g.ajouterArc("A", "B", 12);
         g.ajouterArc("A", "B", 12);
 
         // Vérification
         assertEquals(2, g.listeNoeuds().size());
         assertEquals("A -> B(12) \n", g.toString());
-    }
-
-    @Test
-    public void test_ajouterArc_noeudDestinationInconnu() {
-        // Préparation des données
-        GrapheListe g = new GrapheListe();
-        g.ajouterNoeud("A");
-
-        // Méthode testée
-        g.ajouterArc("A", "B", 12);
-
-        // Vérification
-        assertEquals(2, g.listeNoeuds().size());
-        assertEquals("A -> B(12) \n", g.toString());
-    }
-
-    @Test
-    public void test_ajouterArc_noeudInconnu() {
-        // Préparation des données
-        GrapheListe g = new GrapheListe();
-
-        // Méthode testée
-        g.ajouterArc("A", "B", 12);
-
-        // Vérification
-        assertEquals(0, g.listeNoeuds().size());
     }
 
     @Test
     public void test_toGraphviz() {
         // Préparation des données
         GrapheListe g = new GrapheListe();
-        g.ajouterNoeud("A");
-        g.ajouterNoeud("B");
-        g.ajouterNoeud("C");
-        g.ajouterNoeud("D");
-        g.ajouterNoeud("E");
         g.ajouterArc("A", "B", 12);
         g.ajouterArc("A", "D", 87);
         g.ajouterArc("B", "E", 11);
@@ -119,6 +59,6 @@ public class TestGraphe {
         String graphe = g.toGraphviz();
 
         // Vérification
-        assertEquals("digraph G {\nA -> B [label = 12]\nB -> E [label = 11]\nC -> A [label = 19]\nD -> B [label = 23]\nE -> D [label = 43]\n}", graphe);
+        assertEquals("digraph G {\nA -> B [label = 12]\nA -> D [label = 87]\nB -> E [label = 11]\nD -> B [label = 23]\nD -> C [label = 10]\nE -> D [label = 43]\nC -> A [label = 19]\n}", graphe);
     }
 }
