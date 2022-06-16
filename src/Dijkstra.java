@@ -41,6 +41,7 @@ public class Dijkstra {
         v.setValeur(depart, 0);
 
         while (!ListeATraiter.isEmpty()) {
+            //System.out.println(v);
             Noeud noeud = ListeATraiter.get(0);
             double min = Double.MAX_VALUE;
             for (Noeud n : ListeATraiter) {

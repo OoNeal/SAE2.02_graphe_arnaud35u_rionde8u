@@ -42,6 +42,7 @@ public class BellmanFord {
                 v.setValeur(n, Double.MAX_VALUE);
         }
         for (int i = 0; i < g.listeNoeuds().size() - 1; i++) {
+            //System.out.println(v);
             for (String n : g.listeNoeuds()) {
                 for (Arc a : g.suivants(n)) {
                     if (v.getValeur(n) + a.getCout() < v.getValeur(a.getDest())) {
