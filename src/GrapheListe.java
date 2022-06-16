@@ -36,7 +36,13 @@ public class GrapheListe implements Graphe {
                 throw new RuntimeException(e);
             }
             String[] split = line.split(" ");
-            this.ajouterArc(split[0], split[1], Double.parseDouble(split[2]));
+            String[] split2 = split[0].split("\t");
+            try {
+                this.ajouterArc(split[0], split[1], Double.parseDouble(split[2]));
+            } catch (Exception ignored) {}
+            try {
+                this.ajouterArc(split2[0], split2[1], Double.parseDouble(split2[2]));
+            } catch (Exception ignored) {}
         }
     }
 
