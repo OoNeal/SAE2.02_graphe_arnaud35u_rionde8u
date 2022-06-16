@@ -13,10 +13,9 @@ public class Principale {
         g.ajouterArc("D","C",10);
         g.ajouterArc("E","D",43);
 
-        BellmanFord b = new BellmanFord();
-        Valeur v = b.resoudre(g, "A");
-        System.out.println(v);
-
-        //System.out.println(g.toGraphviz());
+        System.out.println("/--------------------- ! toString ! --------------------\\");
+        System.out.println(g);
+        System.out.println("/--------------------- ! toGraphviz ! --------------------\\");
+        System.out.println(g.toGraphviz());
     }
 }
