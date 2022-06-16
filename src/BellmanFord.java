@@ -34,6 +34,12 @@ package src;
  */
 public class BellmanFord {
 
+    /**
+     * Permet de calculer le chemin le plus court entre un noeud de départ et les autres noeuds en utilisant la méthode de Bellman-Ford
+     * @param g le graphe
+     * @param depart le noeud de départ
+     * @return la valeur contenant tout les noeuds leurs valeurs et les parents des noeuds
+     */
     public Valeur resoudre(Graphe g, String depart) {
         Valeur v = new Valeur();
         v.setValeur(depart, 0);

@@ -31,7 +31,12 @@ public class Dijkstra {
      Fin
      */
 
-
+    /**
+     * Permet de calculer le chemin le plus court entre un noeud de départ et les autres noeuds en utilisant la méthode de Dijkstra
+     * @param g le graphe
+     * @param depart le noeud de départ
+     * @return la valeur contenant tout les noeuds et leurs valeurs et parents
+     */
     public Valeur resoudre(Graphe g, String depart) {
         Valeur v = new Valeur();
         List<Noeud> ListeATraiter = new ArrayList<>();

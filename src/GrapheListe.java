@@ -8,24 +8,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GrapheListe implements Graphe {
+    /**
+     * Liste des noms des noeuds du graphe
+     */
     private final List<String> ensNom;
+    /**
+     * Liste des noeuds du graphe
+     */
     private final List<Noeud> ensNoeuds;
 
+    /**
+     * Constructeur de la classe GrapheListe
+     */
     public GrapheListe() {
         this.ensNom = new ArrayList<>();
         this.ensNoeuds = new ArrayList<>();
     }
 
-    public GrapheListe(String n) {
+    /**
+     * Constructeur de la classe GrapheListe avec un fichier
+     * @param fichier correspondant au chemin du fichier
+    */
+    public GrapheListe(String fichier) {
         this.ensNom = new ArrayList<>();
         this.ensNoeuds = new ArrayList<>();
-        this.construireGraphe(n);
+        this.construireGraphe(fichier);
     }
 
-    private void construireGraphe(String nom) {
+    /**
+     * Methode permettant de construire un GrapheListe avec un fichier
+     * @param fichier correspondant au chemin du fichier qui contient les informations du graphe
+     */
+    private void construireGraphe(String fichier) {
         BufferedReader reader;
         try {
-            reader = new BufferedReader(new FileReader(nom));
+            reader = new BufferedReader(new FileReader(fichier));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -49,12 +66,24 @@ public class GrapheListe implements Graphe {
         }
     }
 
+    /**
+     * Constructeur de la classe GrapheListe de manière aleatoire
+     * @param depart correspondant au nom du noeud de depart
+     * @param arrivee correspondant au nom du noeud d'arrivee
+     * @param nbArcs correspondant au nombre d'arcs du graphe
+     */
     public GrapheListe(String depart, String arrivee, int nbArcs) {
         this.ensNom = new ArrayList<>();
         this.ensNoeuds = new ArrayList<>();
         genererGraphe(depart, arrivee, nbArcs);
     }
 
+    /**
+     * Methode permettant de construire un GrapheListe de manière aleatoire
+     * @param depart correspondant au nom du noeud de depart
+     * @param arrivee correspondant au nom du noeud d'arrivee
+     * @param nbArcs correspondant au nombre d'arcs du graphe
+     */
     public void genererGraphe(String depart, String arrivee, int nbArcs) {
         String nom;
         int nbArcsArrives = (int) (nbArcs - Math.random() * nbArcs / 10);
@@ -114,11 +143,21 @@ public class GrapheListe implements Graphe {
         this.ensNoeuds.get(this.ensNom.indexOf(depart)).ajouterArc(destination, cout);
     }
 
+    /**
+     * Permet de retourner la liste de nom des noeuds du graphe
+     *
+     * @return la liste de nom des noeuds du graphe
+     */
     @Override
     public List<String> listeNoeuds() {
         return ensNom;
     }
 
+    /**
+     * Permet de retourner la liste des noeuds du graphe
+     *
+     * @return la liste des noeuds du graphe
+     */
     @Override
     public List<Arc> suivants(String n) {
         for (Noeud noeud : ensNoeuds) {
@@ -128,7 +167,10 @@ public class GrapheListe implements Graphe {
         return null;
     }
 
-
+    /**
+     * Convertie le graphe de manière a etre utilisable sur Graphviz
+     * @return le graphe converti en String
+     */
     public String toGraphviz() {
         StringBuilder sb = new StringBuilder();
         sb.append("digraph G {\n");
@@ -143,6 +185,10 @@ public class GrapheListe implements Graphe {
         return sb.toString();
     }
 
+    /**
+     * Methode convertissant le graphe en String
+     * @return le graphe en String
+     */
     public String toString() {
         StringBuilder s = new StringBuilder();
         for (Noeud noeud : this.ensNoeuds) {
