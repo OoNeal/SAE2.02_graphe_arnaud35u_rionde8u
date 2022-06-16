@@ -3,7 +3,7 @@ package src;
 public class MainDijkstra {
 
     public static void main(String[] args) {
-        GrapheListe g = new GrapheListe("document/graphe.txt");
+        GrapheListe g = new GrapheListe("document/Graphe_boucle.txt");
 
         System.out.println("/--------------------- ! Dijkstra ! --------------------\\");
         Dijkstra d = new Dijkstra();
