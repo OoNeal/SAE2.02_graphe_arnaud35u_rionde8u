@@ -1,4 +1,7 @@
-package laby;
+package src.Labyrinthe.src.laby;
+
+import src.Graphe;
+import src.GrapheListe;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -31,6 +34,33 @@ public class Labyrinthe {
      * les murs du labyrinthe
      */
     public boolean[][] murs;
+
+    /**
+     * Methode permettant de generer le graphe du Labyrinthe
+     * @return le graphe du labyrinthe
+     */
+    public Graphe genererGraphe(){
+        GrapheListe graphe = new GrapheListe();
+        for(int i = 0; i < murs.length; i++){
+            for(int j = 0; j < murs[i].length; j++){
+                if(!murs[i][j]){
+                    if (i > 0 && !murs[i-1][j]){
+                        graphe.ajouterArc(i*murs[i].length+j + "", (i-1)*murs[i].length+j +"", 1);
+                    }
+                    if (i < murs.length-1 && !murs[i+1][j]){
+                        graphe.ajouterArc(i*murs[i].length+j + "", (i+1)*murs[i].length+j + "", 1);
+                    }
+                    if (j > 0 && !murs[i][j-1]){
+                        graphe.ajouterArc(i*murs[i].length+j + "", i*murs[i].length+j-1 + "", 1);
+                    }
+                    if (j < murs[i].length-1 && !murs[i][j+1]){
+                        graphe.ajouterArc(i*murs[i].length+j + "", i*murs[i].length+j+1 + "", 1);
+                    }
+                }
+            }
+        }
+        return graphe;
+    }
 
     /**
      * retourne la case suivante selon une actions
