@@ -78,6 +78,7 @@ public class GrapheListe implements Graphe {
         genererGraphe(depart, arrivee, nbArcs);
     }
 
+    //Question 24
     /**
      * Methode permettant de construire un GrapheListe de manière aleatoire
      * @param depart correspondant au nom du noeud de depart
