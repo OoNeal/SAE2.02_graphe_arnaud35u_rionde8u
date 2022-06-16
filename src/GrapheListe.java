@@ -11,10 +11,11 @@ public class GrapheListe implements Graphe {
     private final List<String> ensNom;
     private final List<Noeud> ensNoeuds;
 
-    public GrapheListe(){
+    public GrapheListe() {
         this.ensNom = new ArrayList<>();
         this.ensNoeuds = new ArrayList<>();
     }
+
     public GrapheListe(String n) {
         this.ensNom = new ArrayList<>();
         this.ensNoeuds = new ArrayList<>();
@@ -39,11 +40,54 @@ public class GrapheListe implements Graphe {
             String[] split2 = split[0].split("\t");
             try {
                 this.ajouterArc(split[0], split[1], Double.parseDouble(split[2]));
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
             try {
                 this.ajouterArc(split2[0], split2[1], Double.parseDouble(split2[2]));
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
+    }
+
+    public GrapheListe(String depart, String arrivee, int nbArcs) {
+        this.ensNom = new ArrayList<>();
+        this.ensNoeuds = new ArrayList<>();
+        genererGraphe(depart, arrivee, nbArcs);
+    }
+
+    public void genererGraphe(String depart, String arrivee, int nbArcs) {
+        String nom;
+        int nbArcsArrives = (int) (nbArcs - Math.random() * nbArcs / 10);
+        int nbNoeuds = (int) (Math.random() * nbArcs);
+        double maxLettre = Math.random() * 6;
+        while (nbNoeuds > nbArcs || nbNoeuds > 26 || nbNoeuds == 0 || nbNoeuds == 1) {
+            nbNoeuds = (int) (Math.random() * nbArcs);
+        }
+        for (int i = 0; i < nbArcs; i++) {
+            // On augmente la valeur de la lettre maximum petit a petit pour avoir un graphe moins dense
+            maxLettre += 25.0 / nbArcs;
+            // On chosit une lettre aleatoirement
+            double lettre = Math.random() * maxLettre;
+            if (maxLettre > 26) maxLettre = 21;
+            nom = String.valueOf((char) (lettre + 'A'));
+            // Si la lettre est egale a l'arrivee ou n'est pas compris entre les deux on rechoisit une lettre
+            while (lettre < maxLettre - 5 || lettre > maxLettre + 5 && nom.equals(arrivee)) {
+                lettre = Math.random() * maxLettre + 1;
+                nom = String.valueOf((char) (lettre + 'A'));
+            }
+            //S'il n'y a pas d'arc on en rajoute un pour le noeud de départ
+            if (i == 0) ajouterArc(depart, nom, Math.random() * 100);
+                //Si i est inferieur à nbArcsArrives on ajoute un arc aleatoirement avec un noeud deja existant
+            else if (i < nbArcsArrives)
+                for (int j = this.ensNoeuds.size() - 1; j > 0; j--) {
+                    if (Math.random() < 1.0 / j) {
+                        System.out.println(this.ensNoeuds.get(j).getNom());
+                        this.ajouterArc(nom, this.ensNoeuds.get(j).getNom(), Math.random() * 100);
+                        break;
+                    }
+                } else ajouterArc(nom, arrivee, Math.random() * 100); //Sinon on ajoute un arc arrivant à la destination
+        }
+
     }
 
     /**
@@ -56,6 +100,9 @@ public class GrapheListe implements Graphe {
      * @param cout        cout de l'arc
      */
     public void ajouterArc(String depart, String destination, double cout) {
+        if (depart.equals(destination)) {
+            return;
+        }
         if (!this.ensNom.contains(depart)) {
             this.ensNom.add(depart);
             this.ensNoeuds.add(new Noeud(depart));
