@@ -18,7 +18,6 @@ public class GrapheListe implements Graphe {
     public GrapheListe(String n) {
         this.ensNom = new ArrayList<>();
         this.ensNoeuds = new ArrayList<>();
-        this.ensNom.add(n);
         this.construireGraphe(n);
     }
 
@@ -37,8 +36,6 @@ public class GrapheListe implements Graphe {
                 throw new RuntimeException(e);
             }
             String[] split = line.split(" ");
-            this.ensNom.add(split[0]);
-            this.ensNom.add(split[1]);
             this.ajouterArc(split[0], split[1], Double.parseDouble(split[2]));
         }
     }
